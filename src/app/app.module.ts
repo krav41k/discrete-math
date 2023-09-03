@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginPageComponent } from './pages/login/login-page.component';
+import { MaterialModule } from './shared/material.module';
 
 const pages = [DashboardComponent, LoginPageComponent];
 
@@ -15,9 +16,10 @@ const pages = [DashboardComponent, LoginPageComponent];
     ...pages,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

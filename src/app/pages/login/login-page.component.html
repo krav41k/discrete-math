@@ -1,1 +1,32 @@
-login page
+<div class="card mat-elevation-z6">
+  <div class="work-area sub-card">
+    <div class="header">
+      <span>Sign In</span>
+    </div>
+    <div [formGroup]="form" class="form">
+      <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+        <input formControlName="email" matInput placeholder="pat@example.com" required>
+        <ng-template [ngIf]="form.controls['email'].touched && form.controls['email'].errors">
+          <mat-error *ngIf="form.controls['email'].errors['required']">{{ 'You must enter a value' }}</mat-error>
+          <mat-error *ngIf="form.controls['email'].errors['email']">{{ 'Not a valid email' }}</mat-error>
+        </ng-template>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input formControlName="password" matInput placeholder="******" type="password" required>
+        <ng-template [ngIf]="form.controls['password'].touched && form.controls['password'].errors">
+          <mat-error *ngIf="form.controls['password'].errors['required']">{{ 'You must enter a password' }}</mat-error>
+          <mat-error *ngIf="form.controls['password'].errors['min']">{{ 'Password must contain 6 characters' }}</mat-error>
+        </ng-template>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Sign In</button>
+      <span class="forgot-password">Forgot Password</span>
+    </div>
+  </div>
+  <div class="hint sub-card">
+    <span class="header"><b>Welcome to login</b></span>
+    <span>Don't have an account?</span>
+    <button mat-stroked-button class="white-stroke-btn">Sign Up</button>
+  </div>
+</div>
