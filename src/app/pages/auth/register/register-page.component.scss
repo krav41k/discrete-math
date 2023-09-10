@@ -1,9 +1,11 @@
+@import "../auth-variables";
+
 :host {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #90caf9;
+  background-color: $background;
 }
 
 .card {
@@ -36,7 +38,7 @@
 .hint {
   align-items: center;
   justify-content: center;
-  background: linear-gradient(45deg, #ffa726, #ef6c00);
+  background: $gradient;
   color: white;
 
   .white-stroke-btn {

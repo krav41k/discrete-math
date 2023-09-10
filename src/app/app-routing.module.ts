@@ -14,17 +14,17 @@ const routes: Route[] = [
     path: 'dashboard',
   },
   {
-    canActivate: [notAuthGuard],
+    // canActivate: [notAuthGuard],
     component: LoginPageComponent,
     path: 'login',
   },
   {
-    canActivate: [notAuthGuard],
+    // canActivate: [notAuthGuard],
     component: RegisterPageComponent,
     path: 'register',
   },
   {
-    canActivate: [notAuthGuard],
+    // canActivate: [notAuthGuard],
     component: VerifyEmailPageComponent,
     path: 'verify-email',
   },

@@ -7,3 +7,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-color: white;
   color: white;
 }
+
+.mdc-text-field {
+  padding: 0 !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: white;
+}
