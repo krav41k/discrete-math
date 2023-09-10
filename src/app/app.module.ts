@@ -4,11 +4,14 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FirebaseAuthModule } from './firebase-auth.module';
+import { LoginPageComponent } from './pages/auth/login/login-page.component';
+import { RegisterPageComponent } from './pages/auth/register/register-page.component';
+import { VerifyEmailPageComponent } from './pages/auth/verify-email/verify-email-page.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LoginPageComponent } from './pages/login/login-page.component';
 import { MaterialModule } from './shared/material.module';
 
-const pages = [DashboardComponent, LoginPageComponent];
+const pages = [DashboardComponent, LoginPageComponent, RegisterPageComponent, VerifyEmailPageComponent];
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ const pages = [DashboardComponent, LoginPageComponent];
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    FirebaseAuthModule,
     MaterialModule,
   ],
   providers: [],

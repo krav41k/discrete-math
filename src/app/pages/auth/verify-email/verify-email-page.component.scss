@@ -1,0 +1,35 @@
+:host {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #90caf9;
+}
+
+.card {
+  display: flex;
+}
+
+@media screen and (max-width: 1024px) {
+  .card {
+    flex-direction: column;
+  }
+}
+
+.work-area {
+  background-color: white;
+}
+
+.sub-card {
+  flex: 1;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  padding: 48px;
+
+  .header {
+    align-self: center;
+    margin-bottom: 24px;
+    font-size: 28px;
+  }
+}

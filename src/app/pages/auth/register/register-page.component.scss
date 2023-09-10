@@ -1,0 +1,58 @@
+:host {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #90caf9;
+}
+
+.card {
+  display: flex;
+}
+
+@media screen and (max-width: 1024px) {
+  .card {
+    flex-direction: column;
+  }
+}
+
+.work-area {
+  background-color: white;
+
+  .forgot-password {
+    align-self: flex-end;
+    font-size: 12px;
+    margin-top: 16px;
+    color: rgba(black, 0.6);
+    cursor: pointer;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.hint {
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #ffa726, #ef6c00);
+  color: white;
+
+  .white-stroke-btn {
+    margin-top: 16px;
+  }
+}
+
+.sub-card {
+  flex: 1;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  padding: 48px;
+
+  .header {
+    margin-bottom: 24px;
+    font-size: 28px;
+  }
+}

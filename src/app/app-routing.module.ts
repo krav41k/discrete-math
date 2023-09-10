@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
+import { notAuthGuard } from './guards/unauth.guard';
+import { LoginPageComponent } from './pages/auth/login/login-page.component';
+import { RegisterPageComponent } from './pages/auth/register/register-page.component';
+import { VerifyEmailPageComponent } from './pages/auth/verify-email/verify-email-page.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LoginPageComponent } from './pages/login/login-page.component';
 
 const routes: Route[] = [
   {
@@ -11,9 +14,19 @@ const routes: Route[] = [
     path: 'dashboard',
   },
   {
-    canActivate: [],
+    canActivate: [notAuthGuard],
     component: LoginPageComponent,
     path: 'login',
+  },
+  {
+    canActivate: [notAuthGuard],
+    component: RegisterPageComponent,
+    path: 'register',
+  },
+  {
+    canActivate: [notAuthGuard],
+    component: VerifyEmailPageComponent,
+    path: 'verify-email',
   },
   {
     path: '',

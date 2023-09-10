@@ -1,7 +1,7 @@
 <div class="card mat-elevation-z6">
   <div class="work-area sub-card">
     <div class="header">
-      <span>Sign In</span>
+      <span>Sign Up</span>
     </div>
     <div [formGroup]="form" class="form">
       <mat-form-field>
@@ -20,13 +20,13 @@
           <mat-error *ngIf="form.controls['password'].errors['min']">{{ 'Password must contain 6 characters' }}</mat-error>
         </ng-template>
       </mat-form-field>
-      <button mat-raised-button color="primary">Sign In</button>
+      <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="signUp()">Sign Up</button>
       <span class="forgot-password">Forgot Password</span>
     </div>
   </div>
   <div class="hint sub-card">
-    <span class="header"><b>Welcome to login</b></span>
-    <span>Don't have an account?</span>
-    <button mat-stroked-button class="white-stroke-btn">Sign Up</button>
+    <span class="header"><b>Welcome to register</b></span>
+    <span>Already have an account?</span>
+    <button mat-stroked-button class="white-stroke-btn" [routerLink]="'/login'">Sign In</button>
   </div>
 </div>
