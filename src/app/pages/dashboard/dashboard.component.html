@@ -1,8 +1,3 @@
-<mat-toolbar color="primary">
-  <button mat-mini-fab color="accent">
-    <mat-icon>home</mat-icon>
-  </button>
-</mat-toolbar>
 <div class="label">
   <span>Welcome to</span>
   <span>Discrete Math Dashboard</span>
@@ -13,7 +8,7 @@
       <div class="title">Logics</div>
     </div>
     <div class="header"></div>
-    <div class="play-btn">
+    <div class="play-btn" [routerLink]="'/chapter'">
       <svg-icon src="/assets/svg/play-arrow.svg"></svg-icon>
     </div>
   </div>
@@ -21,6 +16,16 @@
   <div class="card">
     <div class="body">
       <div class="title">Set Theory</div>
+    </div>
+    <div class="header"></div>
+    <div class="play-btn">
+      <svg-icon src="/assets/svg/play-arrow.svg"></svg-icon>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="body">
+      <div class="title">Analysis of Algorithms</div>
     </div>
     <div class="header"></div>
     <div class="play-btn">

@@ -10,21 +10,26 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 const routes: Route[] = [
   {
     canActivate: [authGuard],
+    loadChildren: () => import('./pages/chapter/chapter.module').then((m) => m.ChapterModule),
+    path: 'chapter'
+  },
+  {
+    canActivate: [authGuard],
     component: DashboardComponent,
     path: 'dashboard',
   },
   {
-    // canActivate: [notAuthGuard],
+    canActivate: [notAuthGuard],
     component: LoginPageComponent,
     path: 'login',
   },
   {
-    // canActivate: [notAuthGuard],
+    canActivate: [notAuthGuard],
     component: RegisterPageComponent,
     path: 'register',
   },
   {
-    // canActivate: [notAuthGuard],
+    canActivate: [notAuthGuard],
     component: VerifyEmailPageComponent,
     path: 'verify-email',
   },

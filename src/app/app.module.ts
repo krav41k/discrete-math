@@ -12,7 +12,6 @@ import { RegisterPageComponent } from './pages/auth/register/register-page.compo
 import { VerifyEmailPageComponent } from './pages/auth/verify-email/verify-email-page.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MaterialModule } from './shared/material.module';
-
 const pages = [DashboardComponent, LoginPageComponent, RegisterPageComponent, VerifyEmailPageComponent];
 
 @NgModule({
