@@ -1,6 +1,8 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -13,6 +15,9 @@ import { VerifyEmailPageComponent } from './pages/auth/verify-email/verify-email
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MaterialModule } from './shared/material.module';
 const pages = [DashboardComponent, LoginPageComponent, RegisterPageComponent, VerifyEmailPageComponent];
+
+export const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
+  new TranslateHttpLoader(http, 'assets/i18n/');
 
 @NgModule({
   declarations: [
@@ -27,6 +32,13 @@ const pages = [DashboardComponent, LoginPageComponent, RegisterPageComponent, Ve
     FirebaseAuthModule,
     HttpClientModule,
     MaterialModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
