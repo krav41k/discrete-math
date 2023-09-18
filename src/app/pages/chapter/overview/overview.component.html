@@ -1,8 +1,13 @@
-<div class="header">
-  <div class="back">Back to Dashboard</div>
-  <div class="hint"></div>
-  <div class="name"></div>
+<div class="header-container">
+  <div class="header">
+    <div class="back" [routerLink]="'/dashboard'"><mat-icon>navigate_before</mat-icon>Back to Dashboard</div>
+    <div class="text">
+      <div class="hint">{{ 'Chapter ' + data.id | uppercase }}</div>
+      <div class="name">{{ data.title }}</div>
+    </div>
+  </div>
 </div>
+
 <div class="description">
   <span class="introduction">Introduction</span>
   <span class="desc"></span>

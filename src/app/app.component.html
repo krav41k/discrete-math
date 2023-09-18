@@ -1,5 +1,5 @@
 <mat-toolbar *ngIf="authService.userData" color="primary">
-  <button mat-mini-fab color="accent">
+  <button mat-mini-fab color="accent" [routerLink]="'/dashboard'">
     <mat-icon>home</mat-icon>
   </button>
 </mat-toolbar>

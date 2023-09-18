@@ -1,0 +1,57 @@
+@import "src/styles/variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-container {
+  width: 100%;
+  background-color: yellowgreen;
+}
+
+.header {
+  position: relative;
+  max-width: $max-width;
+  margin: auto;
+  height: 260px;
+  width: 100%;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .text {
+    display: flex;
+    flex-direction: column;
+
+    .hint {
+      color: $light-snowy;
+      font-size: 16px;
+    }
+
+    .name {
+      color: white;
+      font-size: 30px;
+      line-height: 2;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .back {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    color: $gray;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s all;
+
+    &:hover {
+      color: $light-snowy;
+    }
+  }
+}
