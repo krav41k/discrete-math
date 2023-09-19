@@ -1,3 +1,11 @@
+@import "src/styles/variables";
+
+:root {
+  display: flex;
+  flex-direction: column;
+  background-color: $light-snowy;
+}
+
 mat-toolbar {
   align-items: center;
   justify-content: center;

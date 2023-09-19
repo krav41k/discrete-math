@@ -18,6 +18,7 @@
   height: 260px;
   width: 100%;
   padding: 40px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +43,7 @@
   .back {
     position: absolute;
     top: 40px;
-    left: 0;
+    left: 32px;
     display: flex;
     align-items: center;
     color: $gray;
@@ -53,5 +54,61 @@
     &:hover {
       color: $light-snowy;
     }
+  }
+}
+
+.description {
+  max-width: $max-width;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  gap: 24px;
+  box-sizing: border-box;
+
+  .introduction {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .desc {
+    display: flex;
+    flex-direction: column;
+    color: $semi-medium-black;
+  }
+}
+
+.map {
+  max-width: $max-width;
+  width: calc(100% - 80px);
+  margin: 40px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid $gray;
+
+  .map-header {
+    height: 64px;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  .map-grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+    .map-item {
+      min-width: 360px;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .map-grid {
+    grid-template-columns: auto auto !important;
   }
 }
