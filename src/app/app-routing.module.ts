@@ -15,6 +15,11 @@ const routes: Route[] = [
   },
   {
     canActivate: [authGuard],
+    loadChildren: () => import('./emulators/emulators.module').then((m) => m.EmulatorsModule),
+    path: 'emulator'
+  },
+  {
+    canActivate: [authGuard],
     component: DashboardComponent,
     path: 'dashboard',
   },

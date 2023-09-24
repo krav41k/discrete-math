@@ -85,6 +85,7 @@
   box-sizing: border-box;
   border-radius: 12px;
   border: 1px solid $gray;
+  overflow: hidden;
 
   .map-header {
     height: 64px;
@@ -92,7 +93,17 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    background-color: white;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.08);
+    color: $semi-dark-black;
+
+    font-size: 18px;
+    font-weight: 500;
+
+    &:hover {
+      color: #0088cc;
+      cursor: pointer;
+    }
   }
 
   .map-grid {
@@ -103,6 +114,13 @@
       min-width: 360px;
       padding: 16px;
       box-sizing: border-box;
+      border: 1px solid $gray;
+      color: $semi-dark-black;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $light-gray;
+      }
     }
   }
 }
