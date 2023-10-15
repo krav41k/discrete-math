@@ -4,7 +4,7 @@
       <span>Sign In</span>
     </div>
     <div [formGroup]="form" class="form">
-      <mat-form-field>
+      <mat-form-field color="accent">
         <mat-label>Enter your email</mat-label>
         <input formControlName="email" matInput placeholder="pat@example.com" required>
         <ng-template [ngIf]="form.controls['email'].touched && form.controls['email'].errors">
@@ -12,7 +12,7 @@
           <mat-error *ngIf="form.controls['email'].errors['email']">{{ 'Not a valid email' }}</mat-error>
         </ng-template>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field color="accent">
         <mat-label>Enter your password</mat-label>
         <input formControlName="password" matInput placeholder="******" type="password" required>
         <ng-template [ngIf]="form.controls['password'].touched && form.controls['password'].errors">

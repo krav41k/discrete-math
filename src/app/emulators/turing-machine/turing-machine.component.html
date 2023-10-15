@@ -9,7 +9,7 @@
     <button mat-stroked-button class="stop" color="accent"><mat-icon>stop</mat-icon></button>
   </div>
   <div class="data-tape">
-    <div class="cell"><mat-icon>navigate_before</mat-icon></div>
+    <div class="cell navigate left"><mat-icon>navigate_before</mat-icon></div>
     <div class="cell">0</div>
     <div class="cell">0</div>
     <div class="cell">0</div>
@@ -21,9 +21,28 @@
     <div class="cell">0</div>
     <div class="cell">0</div>
     <div class="cell">0</div>
-    <div class="cell"><mat-icon>navigate_next</mat-icon></div>
+    <div class="cell navigate right"><mat-icon>navigate_next</mat-icon></div>
+    <div class="pointer">
+      <mat-icon>north</mat-icon>
+    </div>
   </div>
-  <div class="pointer">
-    <mat-icon>north</mat-icon>
+
+  <div class="alphabet">
+    <ng-template [ngIf]="alphabet" [ngIfElse]="emptyAlphabet">
+      <mat-form-field>
+        <mat-label>Alphabet</mat-label>
+        <input matInput disabled [value]="alphabet">
+        <mat-icon matSuffix class="edit-btn" [matTooltip]="'Edit Alphabet'" matTooltipPosition="above" (click)="openAlphabetPromptWindow()">edit</mat-icon>
+      </mat-form-field>
+    </ng-template>
+    <ng-template #emptyAlphabet>
+      Please set the alphabet:
+      <button mat-raised-button color="accent" (click)="openAlphabetPromptWindow()">Set Alphabet</button>
+    </ng-template>
+  </div>
+  <div class="program">
+    <div *ngFor="let command of program" class="command-line">
+
+    </div>
   </div>
 </div>
