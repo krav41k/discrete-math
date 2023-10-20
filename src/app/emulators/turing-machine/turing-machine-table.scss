@@ -1,0 +1,51 @@
+@import "src/styles/variables";
+
+.custom-table {
+  border: 1px solid black;
+}
+
+.custom-table .mat-row, .custom-table .mat-header-row {
+  height: 40px;
+}
+
+.custom-table .mat-cell, .custom-table .mat-header-cell {
+  width: 92px;
+  overflow: hidden;
+}
+
+.mat-header-row {
+  width: 40px;
+
+  &:first-child {
+    width: 20px;
+
+  }
+}
+
+mat-header-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black !important;
+  background-color: #ffea00 !important;
+}
+
+mat-header-cell:first-child, mat-cell:first-child {
+  width: 20px !important;
+  background-color: #ffea00 !important;
+  padding: 8px !important;
+}
+
+.custom-table {
+  overflow: auto;
+  max-height: 400px; /* Встановіть потрібну вам висоту */
+}
+
+mat-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black !important;
+  //padding: 8px;
+  //font-size: 12px;
+}

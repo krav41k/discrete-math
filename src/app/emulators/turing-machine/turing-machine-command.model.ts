@@ -2,7 +2,7 @@ import { TuringMachineMovementDirectionEnum } from './turing-machine-movement-di
 
 export interface TuringMachineCommandModel {
   completeProgram?: boolean
-  direction: TuringMachineMovementDirectionEnum,
-  nextCommand: number,
-  write: string,
+  direction?: TuringMachineMovementDirectionEnum,
+  nextCommand?: number,
+  write?: string,
 }

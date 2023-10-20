@@ -40,9 +40,58 @@
       <button mat-raised-button color="accent" (click)="openAlphabetPromptWindow()">Set Alphabet</button>
     </ng-template>
   </div>
-  <div class="program">
-    <div *ngFor="let command of program" class="command-line">
+  <div *ngIf="alphabet && isProgramCreate" class="program">
+    <mat-table [dataSource]="dataSource" class="custom-table">
+      <!-- Row Header -->
+      <ng-container matColumnDef="row-header">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row}} </mat-cell>
+      </ng-container>
 
-    </div>
+      <!-- Columns Headers -->
+      <ng-container *ngFor="let column of columns" matColumnDef="{{ 'Q'+column }}">
+        <mat-header-cell *matHeaderCellDef> {{ 'Q'+column }} </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <ng-template [ngIf]="program[row][+column] !== null" [ngIfElse]="emptyBtnRef">
+            <ng-container *ngTemplateOutlet="tmCommandRef; context: {$implicit: { column, row }}"></ng-container>
+          </ng-template>
+          <ng-template #emptyBtnRef>
+            <button mat-icon-button [matMenuTriggerFor]="cellMenu" (click)="onOpenedMenu(+column, row)">...</button>
+          </ng-template>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
   </div>
 </div>
+
+<ng-template #tmCommandRef let-commandPath>
+  <div [matMenuTriggerFor]="cellMenu" class="tm-command" (click)="onOpenedMenu(+commandPath.column, commandPath.row)">
+    {{ program[commandPath.row][commandPath.column]?.write || '' }}
+    {{ program[commandPath.row][commandPath.column]?.direction === 'left' ? '⇦' : program[commandPath.row][commandPath.column]?.direction === 'right' ? '⇨' : '⇩' }}
+    {{ program[commandPath.row][commandPath.column]?.nextCommand || '' }}
+  </div>
+</ng-template>
+
+<mat-menu #cellMenu="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="writeMenu">Write</button>
+  <button mat-menu-item [matMenuTriggerFor]="moveMenu">Move</button>
+  <button mat-menu-item [matMenuTriggerFor]="commandMenu">Command</button>
+  <button mat-menu-item> Close</button>
+</mat-menu>
+
+<mat-menu #writeMenu="matMenu">
+  <button mat-menu-item *ngFor="let header of rowHeaders" (click)="onMenuClick($event,'write', header)">{{ header }}</button>
+</mat-menu>
+
+<mat-menu #moveMenu="matMenu">
+  <button mat-menu-item (click)="onMenuClick($event,'move', 'left')">left</button>
+  <button mat-menu-item (click)="onMenuClick($event,'move', 'stay')">stay</button>
+  <button mat-menu-item (click)="onMenuClick($event,'move', 'right')">right</button>
+</mat-menu>
+
+<mat-menu #commandMenu="matMenu">
+  <button mat-menu-item *ngFor="let header of columns" (click)="onMenuClick($event,'command', header)">{{ header }}</button>
+</mat-menu>
