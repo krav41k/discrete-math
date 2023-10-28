@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +24,7 @@ const modules = [
   MatToolbarModule,
   MatTooltipModule,
   ReactiveFormsModule,
+  ScrollingModule,
 ];
 
 @NgModule({

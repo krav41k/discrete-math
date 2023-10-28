@@ -3,28 +3,16 @@
   <span>Turing machine emulator</span>
 </div>
 <div class="content">
-  <div class="controls">
-    <button mat-stroked-button class="start" color="accent"><mat-icon>play_arrow</mat-icon></button>
-    <button mat-stroked-button class="pause" color="accent"><mat-icon>pause</mat-icon></button>
-    <button mat-stroked-button class="stop" color="accent"><mat-icon>stop</mat-icon></button>
+  <div class="controls" [ngClass]="{ disabled: alphabet.length < 1 }">
+    <button mat-stroked-button class="start" color="accent" [ngClass]="{ disabled: programState === tmStatesEnum.running }" (click)="onStart()"><mat-icon>play_arrow</mat-icon><span class="margin-left">Run</span></button>
+    <button mat-stroked-button class="stop" color="accent" [ngClass]="{ disabled: programState === tmStatesEnum.idle }" (click)="onStop()"><mat-icon>stop</mat-icon><span class="margin-left">Stop</span></button>
+    <button mat-stroked-button class="pause" color="accent" [ngClass]="{ disabled: programState !== tmStatesEnum.running }" (click)="onPause()"><mat-icon>pause</mat-icon><span class="margin-left">Pause</span></button>
+    <button mat-stroked-button class="step" color="accent" [ngClass]="{ disabled: programState !== tmStatesEnum.paused }" (click)="onStep()"><mat-icon>redo</mat-icon><span class="margin-left">Step</span></button>
   </div>
-  <div class="data-tape">
-    <div class="cell navigate left"><mat-icon>navigate_before</mat-icon></div>
-    <div class="cell">0</div>
-    <div class="cell">0</div>
-    <div class="cell">0</div>
-    <div class="cell">0</div>
-    <div class="cell">0</div>
-    <div class="cell focus">0</div>
-    <div class="cell">0</div>
-    <div class="cell">0</div>
-    <div class="cell">0</div>
-    <div class="cell">0</div>
-    <div class="cell">0</div>
-    <div class="cell navigate right"><mat-icon>navigate_next</mat-icon></div>
-    <div class="pointer">
-      <mat-icon>north</mat-icon>
-    </div>
+  <div class="data-tape soft">
+    <div class="shift left text-h6" (click)="dataTapeMoveLeft = timestamp"><</div>
+    <dm-turing-machine-data-tape [onMoveLeft]="dataTapeMoveLeft" [onMoveRight]="dataTapeMoveRight"></dm-turing-machine-data-tape>
+    <div class="shift right text-h6" (click)="dataTapeMoveRight = timestamp">></div>
   </div>
 
   <div class="alphabet">
@@ -40,7 +28,7 @@
       <button mat-raised-button color="accent" (click)="openAlphabetPromptWindow()">Set Alphabet</button>
     </ng-template>
   </div>
-  <div *ngIf="alphabet && isProgramCreate" class="program">
+  <div *ngIf="alphabet && isProgramCreate" class="program soft" [ngClass]="{ disabled: programState !== tmStatesEnum.idle }">
     <mat-table [dataSource]="dataSource" class="custom-table">
       <!-- Row Header -->
       <ng-container matColumnDef="row-header">
@@ -52,12 +40,14 @@
       <ng-container *ngFor="let column of columns" matColumnDef="{{ 'Q'+column }}">
         <mat-header-cell *matHeaderCellDef> {{ 'Q'+column }} </mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <ng-template [ngIf]="program[row][+column] !== null" [ngIfElse]="emptyBtnRef">
-            <ng-container *ngTemplateOutlet="tmCommandRef; context: {$implicit: { column, row }}"></ng-container>
-          </ng-template>
-          <ng-template #emptyBtnRef>
-            <button mat-icon-button [matMenuTriggerFor]="cellMenu" (click)="onOpenedMenu(+column, row)">...</button>
-          </ng-template>
+          <div [matMenuTriggerFor]="cellMenu" (click)="onOpenedMenu(+column, row)">
+            <ng-template [ngIf]="program[row][+column] !== null" [ngIfElse]="emptyBtnRef">
+              <ng-container *ngTemplateOutlet="tmCommandRef; context: {$implicit: { column, row }}"></ng-container>
+            </ng-template>
+            <ng-template #emptyBtnRef>
+              <button mat-icon-button>...</button>
+            </ng-template>
+          </div>
         </mat-cell>
       </ng-container>
 
@@ -68,10 +58,10 @@
 </div>
 
 <ng-template #tmCommandRef let-commandPath>
-  <div [matMenuTriggerFor]="cellMenu" class="tm-command" (click)="onOpenedMenu(+commandPath.column, commandPath.row)">
-    {{ program[commandPath.row][commandPath.column]?.write || '' }}
-    {{ program[commandPath.row][commandPath.column]?.direction === 'left' ? '⇦' : program[commandPath.row][commandPath.column]?.direction === 'right' ? '⇨' : '⇩' }}
-    {{ program[commandPath.row][commandPath.column]?.nextCommand || '' }}
+  <div *ngIf="program[commandPath.row][commandPath.column]; let command" class="tm-command">
+    {{ command.write || '' }}
+    {{ command.direction === 'left' ? '⇦' : command.direction === 'right' ? '⇨' : '⇩' }}
+    {{ command.nextCommand !== undefined ? ('Q' + command.nextCommand) : '' }}
   </div>
 </ng-template>
 
@@ -93,5 +83,5 @@
 </mat-menu>
 
 <mat-menu #commandMenu="matMenu">
-  <button mat-menu-item *ngFor="let header of columns" (click)="onMenuClick($event,'command', header)">{{ header }}</button>
+  <button mat-menu-item *ngFor="let header of columns" (click)="onMenuClick($event,'command', header)">{{ 'Q'+header }}</button>
 </mat-menu>

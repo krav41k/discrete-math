@@ -1,0 +1,42 @@
+.tm-virtual-scroll .tm-virtual-scroll-viewport {
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+}
+
+:host {
+  width: 100%;
+  ::ng-deep .cdk-virtual-scroll-content-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.tm-virtual-scroll .item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 58px;
+  border: 1px solid black;
+
+  .index {
+    position: absolute;
+    top: 62px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  &.isTarget {
+    box-shadow: 0 0 0 5px rgba(255,0,0,.9) inset;
+    border-left-color: red;
+    border-right-color: red;
+    //color: white;
+
+    .index {
+      color: red;
+    }
+  }
+}

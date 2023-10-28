@@ -3,23 +3,28 @@ import { ReplaySubject } from 'rxjs';
 import { removeDuplicates } from '../../shared/functions/remove-duplicates';
 import { TuringMachineCommandModel } from './turing-machine-command.model';
 import { TuringMachineMovementDirectionEnum } from './turing-machine-movement-direction.enum';
+import { TuringMachineProgramStateEnum } from './turing-machine-program-state.enum';
 
 @Component({
   templateUrl: './turing-machine.component.html',
-  styleUrls: ['./turing-machine.component.scss', './turing-machine-table.scss']
+  styleUrls: ['./turing-machine.component.scss', './turing-machine-table.scss', './turing-machine-data-tape.scss']
 })
 export class TuringMachineComponent implements OnDestroy {
+  private alphabetArr: string[] = [];
   rowHeaders = ["x", "y", "z"];
   columns = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   displayedColumns = ['row-header', ...this.columns.map(n => `Q${n}`)];
   dataSource = this.rowHeaders;
 
-  private alphabetArr: string[] = [];
   alphabet = '';
   isProgramCreate = false;
   program: { [k: string]: (TuringMachineCommandModel | null )[] } = {};
+  programState = TuringMachineProgramStateEnum.idle;
   selectedItem?: { column: number, row: string };
 
+  dataTapeMoveLeft?: number;
+  dataTapeMoveRight?: number;
+  tmStatesEnum = TuringMachineProgramStateEnum;
   destroyed$ = new ReplaySubject(1);
 
   ngOnDestroy(): void {
@@ -27,7 +32,14 @@ export class TuringMachineComponent implements OnDestroy {
     this.destroyed$.complete();
   }
 
+  get timestamp(): number {
+    return new Date().getTime();
+  }
+
   onAlphabetChange(newAlphabet: string): void {
+    if (newAlphabet.length < 1) {
+      return;
+    }
     newAlphabet = removeDuplicates(newAlphabet)+' ';
     const newAlphabetArr = newAlphabet.split('');
     // const removedChars = this.alphabetArr.filter(char => !newAlphabetArr.includes(char));
@@ -72,6 +84,20 @@ export class TuringMachineComponent implements OnDestroy {
   onOpenedMenu(column: number, row: string): void {
     this.selectedItem = { column, row };
   }
+
+  onStart(): void {
+    this.programState = this.tmStatesEnum.running;
+  }
+
+  onStop(): void {
+    this.programState = this.tmStatesEnum.idle
+  }
+
+  onPause(): void {
+    this.programState = this.tmStatesEnum.paused;
+  }
+
+  onStep(): void {}
 
   private fillProgramArr(): void {
     this.program = {};

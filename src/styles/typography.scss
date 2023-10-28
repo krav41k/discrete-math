@@ -1,0 +1,222 @@
+@import "variables";
+@import 'fonts';
+
+$base-size: 16px; // body1, subtitle1
+$overline-size: 10px; // overline
+$caption-size: 12px; // caption
+$small-size: 14px; // body2, subtitle2, button
+$big-icon-size: 28px;
+$h6-size: 20px;
+$h5-size: 24px;
+$h4-size: 36px;
+$h3-size: 48px;
+$h2-size: 60px;
+$h1-size: 96px;
+
+$base-line-height: 1.5; // body1, subtitle1
+$heading-line-height: 1; // h4, h5
+$large-heading-line-height: 1.2; // h1-h3, h6
+$elements-line-height: 16px; // caption, overline
+$secondary-body-line-height: 20px; // body2
+$secondary-subtitle-line-height: 24px; // subtitle2
+$button-line-height: 40px; // button
+
+$thin-weight: 100;
+$light-weight: 300;
+$regular-weight: 400;
+$medium-weight: 500;
+$bold-weight: 700;
+
+.text-h1,
+h1 {
+  font-family: Roboto-light, sans-serif;
+  font-size: $h1-size;
+  font-weight: $light-weight;
+  line-height: $large-heading-line-height;
+}
+
+.text-h2,
+h2 {
+  font-family: Roboto-light, sans-serif;
+  font-size: $h2-size;
+  font-weight: $light-weight;
+  line-height: $large-heading-line-height;
+}
+
+.text-h3,
+h3 {
+  font-family: Roboto, sans-serif;
+  font-size: $h3-size;
+  font-weight: $regular-weight;
+  line-height: $large-heading-line-height;
+}
+
+.text-h4,
+h4 {
+  font-family: Roboto, sans-serif;
+  font-size: $h4-size;
+  font-weight: $regular-weight;
+  line-height: $heading-line-height;
+}
+
+.text-h5,
+h5 {
+  font-family: Roboto, sans-serif;
+  font-size: $h5-size;
+  font-weight: $medium-weight;
+  line-height: $heading-line-height;
+  letter-spacing: 0.18px;
+}
+
+.text-h6,
+h6 {
+  font-family: Roboto-medium, sans-serif;
+  font-size: $h6-size;
+  font-weight: $medium-weight;
+  line-height: $large-heading-line-height;
+  letter-spacing: 0.18px;
+}
+
+.text-subtitle-1 {
+  font-family: Roboto, sans-serif;
+  font-size: $base-size;
+  font-weight: $regular-weight;
+  line-height: $base-line-height;
+  letter-spacing: 0.15px;
+}
+
+.text-subtitle-2 {
+  font-family: Roboto-medium, sans-serif;
+  font-size: $small-size;
+  font-weight: $medium-weight;
+  line-height: $secondary-subtitle-line-height;
+  letter-spacing: 0.1px;
+}
+
+.container,
+.text-body-1,
+body {
+  font-family: Roboto, sans-serif;
+  font-size: $base-size;
+  font-weight: $regular-weight;
+  line-height: $base-line-height;
+  letter-spacing: 0.5px;
+  color: $semi-medium-black;
+}
+
+.text-body-2 {
+  font-family: Roboto, sans-serif;
+  font-size: $small-size;
+  font-weight: $regular-weight;
+  line-height: $secondary-body-line-height;
+  letter-spacing: 0.25px;
+}
+
+.text-caption,
+caption {
+  font-family: Roboto, sans-serif;
+  font-size: $caption-size;
+  font-weight: $regular-weight;
+  line-height: $elements-line-height;
+  letter-spacing: 0.4px;
+}
+
+.text-overline {
+  font-family: Roboto, sans-serif;
+  font-size: $overline-size;
+  font-weight: $regular-weight;
+  line-height: $elements-line-height;
+  letter-spacing: 1.5px;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-green {
+  color: green;
+}
+
+.text-blue {
+  color: blue;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-light-snowy {
+  color: $light-snowy;
+}
+
+.text-snowy {
+  color: $snowy;
+}
+
+.text-light-gray {
+  color: $light-gray;
+}
+
+.text-gray {
+  color: $gray;
+}
+
+.text-steel {
+  color: steelblue;
+}
+
+.text-dark-gray {
+  color: darkgray;
+}
+
+.text-black {
+  color: black;
+}
+
+.text-semi-dark-black {
+  color: $semi-dark-black;
+}
+
+.text-semi-medium-black {
+  color: $semi-medium-black;
+}
+
+.text-semi-black {
+  color: $semi-black;
+}
+
+.text-semi-light-black {
+  color: $semi-light-black;
+}
+
+.text-thin {
+  font-weight: $thin-weight;
+}
+
+.text-light {
+  font-weight: $light-weight;
+}
+
+.text-regular {
+  font-weight: $regular-weight;
+}
+
+.text-medium {
+  font-weight: $medium-weight;
+}
+
+.text-bold {
+  font-weight: $bold-weight;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}

@@ -1,0 +1,197 @@
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('fonts/Cormorant_Garamond/CormorantGaramond-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('fonts/Open_Sans/OpenSans-SemiBold.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('fonts/Merriweather/Merriweather-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lobster Two';
+  src: url('fonts/Lobster_Two/LobsterTwo-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+// Roboto
+@font-face {
+  font-family: Roboto-thin;
+  src: url('fonts/Roboto/Roboto-Thin.ttf');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: Roboto-thin-italic;
+  src: url('fonts/Roboto/Roboto-ThinItalic.ttf');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Roboto-light;
+  src: url('fonts/Roboto/Roboto-Light.ttf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Roboto-light-italic;
+  src: url('fonts/Roboto/Roboto-LightItalic.ttf');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url('fonts/Roboto/Roboto-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Roboto-italic;
+  src: url('fonts/Roboto/Roboto-Italic.ttf');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Roboto-medium;
+  src: url('fonts/Roboto/Roboto-Medium.ttf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Roboto-medium-italic;
+  src: url('fonts/Roboto/Roboto-MediumItalic.ttf');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Roboto-bold;
+  src: url('fonts/Roboto/Roboto-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Roboto-bold-italic;
+  src: url('fonts/Roboto/Roboto-BoldItalic.ttf');
+  font-weight: 700;
+  font-style: italic;
+}
+
+// Playfair
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-ExtraBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Playfair;
+  src: url('fonts/PlayfairDisplay/PlayfairDisplay-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}

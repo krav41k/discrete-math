@@ -9,7 +9,7 @@
 }
 
 .custom-table .mat-cell, .custom-table .mat-header-cell {
-  width: 92px;
+  width: 100px;
   overflow: hidden;
 }
 
@@ -48,4 +48,5 @@ mat-cell {
   border: 1px solid black !important;
   //padding: 8px;
   //font-size: 12px;
+  width: 100px;
 }

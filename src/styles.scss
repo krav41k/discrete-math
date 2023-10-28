@@ -1,5 +1,6 @@
 @import "styles/material-theme";
 @import "styles/variables";
+@import "styles/typography";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -34,5 +35,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: $semi-medium-black;
     margin-top: 8px;
     font-size: 30px;
+  }
+}
+
+cdk-virtual-scroll-viewport {
+  height: 100%;
+  width: 100%;
+
+  ::ng-deep .cdk-virtual-scroll-content-wrapper {
+    max-width: 100% !important;
   }
 }

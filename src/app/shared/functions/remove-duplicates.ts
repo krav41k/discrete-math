@@ -1,6 +1,6 @@
 export const removeDuplicates = (str: string) => {
   str.toLowerCase();
-  let charMap: { [k: string]: boolean } = {};
+  let charMap: { [k: string]: boolean } = { ' ': true };
   let result = '';
 
   for (let i = 0; i < str.length; i++) {
