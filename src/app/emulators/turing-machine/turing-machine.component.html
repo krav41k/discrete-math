@@ -3,11 +3,11 @@
   <span>Turing machine emulator</span>
 </div>
 <div class="content">
-  <div class="controls" [ngClass]="{ disabled: alphabet.length < 1 }">
-    <button mat-stroked-button class="start" color="accent" [ngClass]="{ disabled: programState === tmStatesEnum.running }" (click)="onStart()"><mat-icon>play_arrow</mat-icon><span class="margin-left">Run</span></button>
-    <button mat-stroked-button class="stop" color="accent" [ngClass]="{ disabled: programState === tmStatesEnum.idle }" (click)="onStop()"><mat-icon>stop</mat-icon><span class="margin-left">Stop</span></button>
-    <button mat-stroked-button class="pause" color="accent" [ngClass]="{ disabled: programState !== tmStatesEnum.running }" (click)="onPause()"><mat-icon>pause</mat-icon><span class="margin-left">Pause</span></button>
-    <button mat-stroked-button class="step" color="accent" [ngClass]="{ disabled: programState !== tmStatesEnum.paused }" (click)="onStep()"><mat-icon>redo</mat-icon><span class="margin-left">Step</span></button>
+  <div class="controls" [ngClass]="{ disabled: tmStatesService.alphabet.length < 1 }">
+    <button mat-stroked-button class="start" color="accent" [ngClass]="{ disabled: tmStatesService.programState === tmStatesEnum.running }" (click)="onStart()"><mat-icon>play_arrow</mat-icon><span class="margin-left">Run</span></button>
+    <button mat-stroked-button class="stop" color="accent" [ngClass]="{ disabled: tmStatesService.programState === tmStatesEnum.idle }" (click)="onStop()"><mat-icon>stop</mat-icon><span class="margin-left">Stop</span></button>
+    <button mat-stroked-button class="pause" color="accent" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.running }" (click)="onPause()"><mat-icon>pause</mat-icon><span class="margin-left">Pause</span></button>
+    <button mat-stroked-button class="step" color="accent" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.paused }" (click)="onStep()"><mat-icon>redo</mat-icon><span class="margin-left">Step</span></button>
   </div>
   <div class="data-tape soft">
     <div class="shift left text-h6" (click)="dataTapeMoveLeft = timestamp"><</div>
@@ -16,10 +16,10 @@
   </div>
 
   <div class="alphabet">
-    <ng-template [ngIf]="alphabet" [ngIfElse]="emptyAlphabet">
+    <ng-template [ngIf]="tmStatesService.alphabet" [ngIfElse]="emptyAlphabet">
       <mat-form-field>
         <mat-label>Alphabet</mat-label>
-        <input matInput disabled [value]="alphabet">
+        <input matInput disabled [value]="tmStatesService.alphabet">
         <mat-icon matSuffix class="edit-btn" [matTooltip]="'Edit Alphabet'" matTooltipPosition="above" (click)="openAlphabetPromptWindow()">edit</mat-icon>
       </mat-form-field>
     </ng-template>
@@ -28,8 +28,8 @@
       <button mat-raised-button color="accent" (click)="openAlphabetPromptWindow()">Set Alphabet</button>
     </ng-template>
   </div>
-  <div *ngIf="alphabet && isProgramCreate" class="program soft" [ngClass]="{ disabled: programState !== tmStatesEnum.idle }">
-    <mat-table [dataSource]="dataSource" class="custom-table">
+  <div *ngIf="tmStatesService.alphabet && tmStatesService.isProgramCreate" class="program soft" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.idle }">
+    <mat-table [dataSource]="tmStatesService.dataSource" class="custom-table">
       <!-- Row Header -->
       <ng-container matColumnDef="row-header">
         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
@@ -37,11 +37,11 @@
       </ng-container>
 
       <!-- Columns Headers -->
-      <ng-container *ngFor="let column of columns" matColumnDef="{{ 'Q'+column }}">
+      <ng-container *ngFor="let column of tmStatesService.columns" matColumnDef="{{ 'Q'+column }}">
         <mat-header-cell *matHeaderCellDef> {{ 'Q'+column }} </mat-header-cell>
         <mat-cell *matCellDef="let row">
           <div [matMenuTriggerFor]="cellMenu" (click)="onOpenedMenu(+column, row)">
-            <ng-template [ngIf]="program[row][+column] !== null" [ngIfElse]="emptyBtnRef">
+            <ng-template [ngIf]="tmStatesService.program[row][+column] !== null" [ngIfElse]="emptyBtnRef">
               <ng-container *ngTemplateOutlet="tmCommandRef; context: {$implicit: { column, row }}"></ng-container>
             </ng-template>
             <ng-template #emptyBtnRef>
@@ -51,14 +51,14 @@
         </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-header-row *matHeaderRowDef="tmStatesService.displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: tmStatesService.displayedColumns;"></mat-row>
     </mat-table>
   </div>
 </div>
 
 <ng-template #tmCommandRef let-commandPath>
-  <div *ngIf="program[commandPath.row][commandPath.column]; let command" class="tm-command">
+  <div *ngIf="tmStatesService.program[commandPath.row][commandPath.column]; let command" class="tm-command">
     {{ command.write || '' }}
     {{ command.direction === 'left' ? '⇦' : command.direction === 'right' ? '⇨' : '⇩' }}
     {{ command.nextCommand !== undefined ? ('Q' + command.nextCommand) : '' }}
@@ -73,7 +73,7 @@
 </mat-menu>
 
 <mat-menu #writeMenu="matMenu">
-  <button mat-menu-item *ngFor="let header of rowHeaders" (click)="onMenuClick($event,'write', header)">{{ header }}</button>
+  <button mat-menu-item *ngFor="let header of tmStatesService.rowHeaders" (click)="onMenuClick($event,'write', header)">{{ header }}</button>
 </mat-menu>
 
 <mat-menu #moveMenu="matMenu">
@@ -83,5 +83,5 @@
 </mat-menu>
 
 <mat-menu #commandMenu="matMenu">
-  <button mat-menu-item *ngFor="let header of columns" (click)="onMenuClick($event,'command', header)">{{ 'Q'+header }}</button>
+  <button mat-menu-item *ngFor="let header of tmStatesService.columns" (click)="onMenuClick($event,'command', header)">{{ 'Q'+header }}</button>
 </mat-menu>
