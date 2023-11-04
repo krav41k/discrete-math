@@ -25,4 +25,8 @@ export class TuringMachineEmulatorService {
   private emulate(): void {
     // this.tmStateService.
   }
+
+  private getCurrentTapeValue(): string {
+    return this.tmStatesService.dataTapeItems[this.tmStatesService.currentIndex$.value || 0];
+  }
 }

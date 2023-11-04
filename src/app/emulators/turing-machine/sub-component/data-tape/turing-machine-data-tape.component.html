@@ -1,10 +1,17 @@
-<div *ngIf="(tmStateService.currentIndex$ | async) as cIndex" class="tm-virtual-scroll">
+<div *ngIf="(tmStatesService.currentIndex$ | async) as cIndex" class="tm-virtual-scroll">
   <cdk-virtual-scroll-viewport #viewportRef orientation="horizontal" itemSize="44" class="tm-virtual-scroll-viewport">
     <div
-      *cdkVirtualFor="let item of tmStateService.dataTapeItems; index as idx"
+      *cdkVirtualFor="let item of tmStatesService.dataTapeItems; index as idx"
       class="item" [ngClass]="{ isTarget: cIndex === idx }"
+      [matMenuTriggerFor]="writeMenu"
+      (click)="selectedCellIdx = idx"
     >
+      {{ tmStatesService.dataTapeItems[idx] }}
       <span class="index text-caption">{{ idx - 1000 }}</span>
     </div>
   </cdk-virtual-scroll-viewport>
 </div>
+
+<mat-menu #writeMenu="matMenu">
+  <button mat-menu-item *ngFor="let header of tmStatesService.rowHeaders" (click)="onMenuClick(header)">{{ header }}</button>
+</mat-menu>

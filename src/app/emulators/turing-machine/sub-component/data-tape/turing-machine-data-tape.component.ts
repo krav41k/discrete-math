@@ -14,15 +14,16 @@ export class TuringMachineDataTapeComponent implements AfterViewInit, OnDestroy 
   itemWidth = 44;
   viewportWidth?: number;
 
+  selectedCellIdx?: number;
 
   destroyed$ = new ReplaySubject();
 
-  constructor(private elementRef: ElementRef, public tmStateService: TuringMachineStatesService) {}
+  constructor(private elementRef: ElementRef, public tmStatesService: TuringMachineStatesService) {}
 
   ngAfterViewInit() {
     this.updateViewportWidth();
 
-    this.tmStateService.currentIndex$.pipe(
+    this.tmStatesService.currentIndex$.pipe(
       takeUntil(this.destroyed$),
       skip(1),
       tap(() => this.scrollToIndex())
@@ -49,8 +50,12 @@ export class TuringMachineDataTapeComponent implements AfterViewInit, OnDestroy 
     if (!this.viewportWidth || !this.viewportRef) {
       return;
     }
-    setTimeout(() => this.viewport?.scrollToIndex(this.tmStateService.currentIndex$.value - Math.floor(this.viewportWidth! / this.itemWidth / 2) + 1, "smooth"), 100)
+    setTimeout(() => this.viewport?.scrollToIndex(this.tmStatesService.currentIndex$.value - Math.floor(this.viewportWidth! / this.itemWidth / 2) + 1, "smooth"), 100)
 
     console.log('scrolled');
+  }
+
+  onMenuClick(value: string) {
+    this.tmStatesService.dataTapeItems[this.selectedCellIdx || 0] = value;
   }
 }

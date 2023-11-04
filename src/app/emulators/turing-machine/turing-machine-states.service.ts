@@ -10,7 +10,7 @@ export class TuringMachineStatesService {
   private alphabetArr: string[] = [];
 
   currentIndex$ = new BehaviorSubject(1000);
-  dataTapeItems = Array.from({length: 2001});
+  dataTapeItems: string[] = Array.from({length: 2001}, v => v = '');
 
   columns = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   displayedColumns = ['row-header', ...this.columns.map(n => `Q${n}`)];

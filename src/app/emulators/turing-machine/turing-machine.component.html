@@ -9,7 +9,7 @@
     <button mat-stroked-button class="pause" color="accent" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.running }" (click)="tmEmulatorService.onPause()"><mat-icon>pause</mat-icon><span class="margin-left">Pause</span></button>
     <button mat-stroked-button class="step" color="accent" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.paused }" (click)="onStep()"><mat-icon>redo</mat-icon><span class="margin-left">Step</span></button>
   </div>
-  <div class="data-tape soft">
+  <div class="data-tape soft" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.idle }">
     <div class="shift left text-h6" (click)="tmStatesService.onMoveTapeLeft()"><</div>
     <dm-turing-machine-data-tape></dm-turing-machine-data-tape>
     <div class="shift right text-h6" (click)="tmStatesService.onMoveTapeRight()">></div>
