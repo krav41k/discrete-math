@@ -4,15 +4,15 @@
 </div>
 <div class="content">
   <div class="controls" [ngClass]="{ disabled: tmStatesService.alphabet.length < 1 }">
-    <button mat-stroked-button class="start" color="accent" [ngClass]="{ disabled: tmStatesService.programState === tmStatesEnum.running }" (click)="onStart()"><mat-icon>play_arrow</mat-icon><span class="margin-left">Run</span></button>
-    <button mat-stroked-button class="stop" color="accent" [ngClass]="{ disabled: tmStatesService.programState === tmStatesEnum.idle }" (click)="onStop()"><mat-icon>stop</mat-icon><span class="margin-left">Stop</span></button>
-    <button mat-stroked-button class="pause" color="accent" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.running }" (click)="onPause()"><mat-icon>pause</mat-icon><span class="margin-left">Pause</span></button>
+    <button mat-stroked-button class="start" color="accent" [ngClass]="{ disabled: tmStatesService.programState === tmStatesEnum.running }" (click)="tmEmulatorService.onStart()"><mat-icon>play_arrow</mat-icon><span class="margin-left">Run</span></button>
+    <button mat-stroked-button class="stop" color="accent" [ngClass]="{ disabled: tmStatesService.programState === tmStatesEnum.idle }" (click)="tmEmulatorService.onStop()"><mat-icon>stop</mat-icon><span class="margin-left">Stop</span></button>
+    <button mat-stroked-button class="pause" color="accent" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.running }" (click)="tmEmulatorService.onPause()"><mat-icon>pause</mat-icon><span class="margin-left">Pause</span></button>
     <button mat-stroked-button class="step" color="accent" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.paused }" (click)="onStep()"><mat-icon>redo</mat-icon><span class="margin-left">Step</span></button>
   </div>
   <div class="data-tape soft">
-    <div class="shift left text-h6" (click)="dataTapeMoveLeft = timestamp"><</div>
-    <dm-turing-machine-data-tape [onMoveLeft]="dataTapeMoveLeft" [onMoveRight]="dataTapeMoveRight"></dm-turing-machine-data-tape>
-    <div class="shift right text-h6" (click)="dataTapeMoveRight = timestamp">></div>
+    <div class="shift left text-h6" (click)="tmStatesService.onMoveTapeLeft()"><</div>
+    <dm-turing-machine-data-tape></dm-turing-machine-data-tape>
+    <div class="shift right text-h6" (click)="tmStatesService.onMoveTapeRight()">></div>
   </div>
 
   <div class="alphabet">
@@ -55,6 +55,11 @@
       <mat-row *matRowDef="let row; columns: tmStatesService.displayedColumns;"></mat-row>
     </mat-table>
   </div>
+
+  <mat-form-field appearance="outline" class="console" color="accent">
+    <mat-label>Console</mat-label>
+    <textarea matInput [value]="tmStatesService.consoleText" (keydown)="$event.preventDefault()"></textarea>
+  </mat-form-field>
 </div>
 
 <ng-template #tmCommandRef let-commandPath>

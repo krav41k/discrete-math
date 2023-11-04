@@ -1,5 +1,10 @@
-<div class="tm-virtual-scroll">
+<div *ngIf="(tmStateService.currentIndex$ | async) as cIndex" class="tm-virtual-scroll">
   <cdk-virtual-scroll-viewport #viewportRef orientation="horizontal" itemSize="44" class="tm-virtual-scroll-viewport">
-    <div *cdkVirtualFor="let item of items; index as idx" class="item" [ngClass]="{ isTarget: currentIndex === idx }"> <span class="index text-caption">{{ idx - 1000 }}</span></div>
+    <div
+      *cdkVirtualFor="let item of tmStateService.dataTapeItems; index as idx"
+      class="item" [ngClass]="{ isTarget: cIndex === idx }"
+    >
+      <span class="index text-caption">{{ idx - 1000 }}</span>
+    </div>
   </cdk-virtual-scroll-viewport>
 </div>

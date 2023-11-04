@@ -1,6 +1,7 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, Output, ViewChild } from '@angular/core';
-import { ReplaySubject, Subject } from 'rxjs';
+import { ReplaySubject, skip, Subject, takeUntil, tap } from 'rxjs';
+import { TuringMachineStatesService } from '../../turing-machine-states.service';
 
 @Component({
   selector: 'dm-turing-machine-data-tape',
@@ -10,39 +11,27 @@ import { ReplaySubject, Subject } from 'rxjs';
 export class TuringMachineDataTapeComponent implements AfterViewInit, OnDestroy {
   @ViewChild(CdkVirtualScrollViewport) viewport?: CdkVirtualScrollViewport;
   @ViewChild('viewportRef', { read: ElementRef }) viewportRef?: ElementRef;
-  items = Array.from({length: 2001});
-  public currentIndex = 1000;
-  public itemWidth = 44;
-  public viewportWidth?: number;
+  itemWidth = 44;
+  viewportWidth?: number;
 
 
   destroyed$ = new ReplaySubject();
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef, public tmStateService: TuringMachineStatesService) {}
 
   ngAfterViewInit() {
     this.updateViewportWidth();
+
+    this.tmStateService.currentIndex$.pipe(
+      takeUntil(this.destroyed$),
+      skip(1),
+      tap(() => this.scrollToIndex())
+    ).subscribe();
   }
 
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
-  }
-
-  @Input() set onMoveLeft(value: unknown) {
-    if (!value) {
-      return;
-    }
-    this.currentIndex = Math.max(0, this.currentIndex - 1);
-    this.scrollToIndex();
-  }
-
-  @Input() set onMoveRight(value: unknown) {
-    if (!value) {
-      return;
-    }
-    this.currentIndex = Math.min(this.items.length, this.currentIndex + 1);
-    this.scrollToIndex();
   }
 
   @HostListener('window:resize')
@@ -60,20 +49,8 @@ export class TuringMachineDataTapeComponent implements AfterViewInit, OnDestroy 
     if (!this.viewportWidth || !this.viewportRef) {
       return;
     }
-    // console.log(this.viewport);
-    // this.viewPort?.scrollToIndex(1000, "smooth");
-    setTimeout(() => this.viewport?.scrollToIndex(this.currentIndex - Math.floor(this.viewportWidth! / this.itemWidth / 2) + 1, "smooth"), 100)
+    setTimeout(() => this.viewport?.scrollToIndex(this.tmStateService.currentIndex$.value - Math.floor(this.viewportWidth! / this.itemWidth / 2) + 1, "smooth"), 100)
 
     console.log('scrolled');
-  }
-
-  scrollLeft() {
-    this.currentIndex--;
-    this.scrollToIndex();
-  }
-
-  scrollRight() {
-    this.currentIndex++;
-    this.scrollToIndex();
   }
 }

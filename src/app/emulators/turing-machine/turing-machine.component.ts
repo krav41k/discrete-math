@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { removeDuplicates } from '../../shared/functions/remove-duplicates';
 import { TuringMachineCommandModel } from './turing-machine-command.model';
+import { TuringMachineEmulatorService } from './turing-machine-emulator.service';
 import { TuringMachineMovementDirectionEnum } from './turing-machine-movement-direction.enum';
 import { TuringMachineProgramStateEnum } from './turing-machine-program-state.enum';
 import { TuringMachineStatesService } from './turing-machine-states.service';
@@ -13,20 +14,14 @@ import { TuringMachineStatesService } from './turing-machine-states.service';
 export class TuringMachineComponent implements OnDestroy {
   selectedItem?: { column: number, row: string };
 
-  dataTapeMoveLeft?: number;
-  dataTapeMoveRight?: number;
   tmStatesEnum = TuringMachineProgramStateEnum;
   destroyed$ = new ReplaySubject(1);
 
-  constructor(public tmStatesService: TuringMachineStatesService) {}
+  constructor(public tmEmulatorService: TuringMachineEmulatorService, public tmStatesService: TuringMachineStatesService) {}
 
   ngOnDestroy(): void {
     this.destroyed$.next(true);
     this.destroyed$.complete();
-  }
-
-  get timestamp(): number {
-    return new Date().getTime();
   }
 
   openAlphabetPromptWindow(): void {
@@ -60,18 +55,6 @@ export class TuringMachineComponent implements OnDestroy {
 
   onOpenedMenu(column: number, row: string): void {
     this.selectedItem = { column, row };
-  }
-
-  onStart(): void {
-    this.tmStatesService.programState = this.tmStatesEnum.running;
-  }
-
-  onStop(): void {
-    this.tmStatesService.programState = this.tmStatesEnum.idle
-  }
-
-  onPause(): void {
-    this.tmStatesService.programState = this.tmStatesEnum.paused;
   }
 
   onStep(): void {}
