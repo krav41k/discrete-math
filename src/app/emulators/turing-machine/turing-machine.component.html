@@ -66,7 +66,8 @@
   <div *ngIf="tmStatesService.program[commandPath.row][commandPath.column]; let command" class="tm-command">
     {{ command.write || '' }}
     {{ command.direction === 'left' ? '⇦' : command.direction === 'right' ? '⇨' : '⇩' }}
-    {{ command.nextCommand !== undefined ? ('Q' + command.nextCommand) : '' }}
+    {{ !command.completeProgram && command.nextCommand !== undefined ? ('Q' + command.nextCommand) : '' }}
+    {{ command.completeProgram ? '🏁' : '' }}
   </div>
 </ng-template>
 
@@ -88,5 +89,8 @@
 </mat-menu>
 
 <mat-menu #commandMenu="matMenu">
-  <button mat-menu-item *ngFor="let header of tmStatesService.columns" (click)="onMenuClick($event,'command', header)">{{ 'Q'+header }}</button>
+  <button mat-menu-item [disabled]="selectedCommand?.completeProgram" *ngFor="let header of tmStatesService.columns" (click)="onMenuClick($event,'command', header)">{{ 'Q'+header }}</button>
+  <button mat-menu-item (click)="onMenuClick($event, 'finish', '')">
+    {{ selectedCommand?.completeProgram ? '✔' : '' }} Finish
+  </button>
 </mat-menu>

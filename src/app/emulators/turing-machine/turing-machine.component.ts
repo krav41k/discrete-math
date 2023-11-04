@@ -12,7 +12,7 @@ import { TuringMachineStatesService } from './turing-machine-states.service';
   styleUrls: ['./turing-machine.component.scss', './turing-machine-table.scss', './turing-machine-data-tape.scss']
 })
 export class TuringMachineComponent implements OnDestroy {
-  selectedItem?: { column: number, row: string };
+  selectedCommand?: TuringMachineCommandModel;
 
   tmStatesEnum = TuringMachineProgramStateEnum;
   destroyed$ = new ReplaySubject(1);
@@ -31,30 +31,32 @@ export class TuringMachineComponent implements OnDestroy {
 
   onMenuClick($event: Event, action: string, option: string) {
     $event.stopPropagation();
-    if (!this.selectedItem) {
+    if (!this.selectedCommand) {
       return;
     }
-    let command = this.tmStatesService.program[this.selectedItem.row][this.selectedItem.column];
-    if (!command) {
-      command = this.tmStatesService.program[this.selectedItem.row][this.selectedItem.column] = {};
-    }
-    // console.log(data);
-    console.log(action, option);
+
     switch (action) {
-      case 'write':
-        command.write = option;
+      case 'command':
+        this.selectedCommand.nextCommand = +option;
+        break;
+      case 'finish':
+        this.selectedCommand.completeProgram = !this.selectedCommand.completeProgram;
         break;
       case 'move':
-        command.direction = option as TuringMachineMovementDirectionEnum;
+        this.selectedCommand.direction = option as TuringMachineMovementDirectionEnum;
         break;
-      case 'command':
-        command.nextCommand = +option;
+      case 'write':
+        this.selectedCommand.write = option;
         break;
     }
   }
 
   onOpenedMenu(column: number, row: string): void {
-    this.selectedItem = { column, row };
+    let selectedCommand = this.tmStatesService.program[row][column];
+    if (!selectedCommand) {
+      selectedCommand = this.tmStatesService.program[row][column] = {};
+    }
+    this.selectedCommand = selectedCommand;
   }
 
   onStep(): void {}

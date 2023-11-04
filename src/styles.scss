@@ -1,6 +1,7 @@
+@import "styles/classes";
 @import "styles/material-theme";
-@import "styles/variables";
 @import "styles/typography";
+@import "styles/variables";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
