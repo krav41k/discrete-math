@@ -49,6 +49,8 @@ export class TuringMachineComponent implements OnDestroy {
         this.selectedCommand.write = option;
         break;
     }
+
+    this.tmStatesService.saveProgram();
   }
 
   onOpenedMenu(column: number, row: string): void {

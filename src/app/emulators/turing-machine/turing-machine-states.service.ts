@@ -1,3 +1,4 @@
+import { J } from '@angular/cdk/keycodes';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { removeDuplicates } from '../../shared/functions/remove-duplicates';
@@ -55,6 +56,12 @@ export class TuringMachineStatesService {
     this.alphabetArr = newAlphabetArr;
     this.dataSource = this.rowHeaders = newAlphabetArr;
 
+    const savedProgram = this.localStorageProgram;
+    if (Object.keys(savedProgram).reduce((acc, cur) => acc += cur) === newAlphabet) {
+      this.applyProgram(savedProgram);
+      return;
+    }
+
     this.fillProgramArr();
   }
 
@@ -66,10 +73,20 @@ export class TuringMachineStatesService {
     this.currentIndex$.next(Math.min(this.dataTapeItems.length, this.currentIndex$.value + 1));
   }
 
+  saveProgram(): void {
+    this.localStorageProgram = this.program;
+  }
+
+  private applyProgram(program: { [k: string]: (TuringMachineCommandModel | null )[] }): void {
+    this.program = program;
+    this.isProgramCreate = true;
+  }
+
   private fillProgramArr(): void {
     this.program = {};
     this.alphabetArr.forEach(char => this.program[char] = Array(this.columns.length).fill(null));
     this.isProgramCreate = true
+    this.saveProgram();
   }
 
   private get localStorageAlphabet(): string {
@@ -78,5 +95,13 @@ export class TuringMachineStatesService {
 
   private set localStorageAlphabet(newAlphabet: string) {
     localStorage.setItem('alphabet', newAlphabet);
+  }
+
+  private get localStorageProgram(): { [k: string]: (TuringMachineCommandModel | null )[] } {
+    return JSON.parse(localStorage.getItem('program-1') || '{}');
+  }
+
+  private set localStorageProgram(newProgram: { [k: string]: (TuringMachineCommandModel | null )[] }) {
+    localStorage.setItem('program-1', JSON.stringify(newProgram));
   }
 }
