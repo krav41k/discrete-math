@@ -28,6 +28,7 @@ export class TuringMachineStatesService {
     const alphabet = this.localStorageAlphabet;
     if (alphabet.length > 0) {
       this.onAlphabetChange(alphabet);
+      this.applyDataTape();
     }
 
     this.addMessageToConsole('Turing machine states service initialized');
@@ -40,6 +41,13 @@ export class TuringMachineStatesService {
     const seconds = String(now.getSeconds()).padStart(2, '0');
     const formattedTime = `${hours}:${minutes}:${seconds}`;
     this.consoleText += `[${formattedTime}]: ${message} \n`;
+  }
+
+  applyDataTape(): void {
+    const data = this.localStorageDataTape;
+    if (data.alphabet === this.alphabet) {
+      this.dataTapeItems = data.dataTape;
+    }
   }
 
   onAlphabetChange(newAlphabet: string): void {
@@ -73,6 +81,10 @@ export class TuringMachineStatesService {
     this.currentIndex$.next(Math.min(this.dataTapeItems.length, this.currentIndex$.value + 1));
   }
 
+  saveDataTape(): void {
+    this.localStorageDataTape = { dataTape: this.dataTapeItems, alphabet: this.alphabet };
+  }
+
   saveProgram(): void {
     this.localStorageProgram = this.program;
   }
@@ -95,6 +107,14 @@ export class TuringMachineStatesService {
 
   private set localStorageAlphabet(newAlphabet: string) {
     localStorage.setItem('alphabet', newAlphabet);
+  }
+
+  private get localStorageDataTape(): { dataTape: string[], alphabet: string } {
+    return JSON.parse(localStorage.getItem('data-tape-1') || '[]')
+  }
+
+  private set localStorageDataTape(data: { dataTape: string[], alphabet: string } ) {
+    localStorage.setItem('data-tape-1', JSON.stringify(data));
   }
 
   private get localStorageProgram(): { [k: string]: (TuringMachineCommandModel | null )[] } {

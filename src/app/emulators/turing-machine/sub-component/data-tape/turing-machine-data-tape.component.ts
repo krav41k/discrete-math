@@ -51,11 +51,10 @@ export class TuringMachineDataTapeComponent implements AfterViewInit, OnDestroy 
       return;
     }
     setTimeout(() => this.viewport?.scrollToIndex(this.tmStatesService.currentIndex$.value - Math.floor(this.viewportWidth! / this.itemWidth / 2) + 1, "smooth"), 100)
-
-    console.log('scrolled');
   }
 
   onMenuClick(value: string) {
     this.tmStatesService.dataTapeItems[this.selectedCellIdx || 0] = value;
+    this.tmStatesService.saveDataTape();
   }
 }
