@@ -4,7 +4,7 @@
 </div>
 <div class="content">
   <div class="controls" [ngClass]="{ disabled: tmStatesService.alphabet.length < 1 }">
-    <button mat-stroked-button class="start" color="accent" [ngClass]="{ disabled: tmStatesService.programState === tmStatesEnum.running }" (click)="tmEmulatorService.onStart()"><mat-icon>play_arrow</mat-icon><span class="margin-left">Run</span></button>
+    <button mat-stroked-button class="start" color="accent" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.idle && tmStatesService.programState !== tmStatesEnum.paused }" (click)="tmEmulatorService.onStart()"><mat-icon>play_arrow</mat-icon><span class="margin-left">Run</span></button>
     <button mat-stroked-button class="stop" color="accent" [ngClass]="{ disabled: tmStatesService.programState === tmStatesEnum.idle }" (click)="tmEmulatorService.onStop()"><mat-icon>stop</mat-icon><span class="margin-left">Stop</span></button>
     <button mat-stroked-button class="pause" color="accent" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.running }" (click)="tmEmulatorService.onPause()"><mat-icon>pause</mat-icon><span class="margin-left">Pause</span></button>
     <button mat-stroked-button class="step" color="accent" [ngClass]="{ disabled: tmStatesService.programState !== tmStatesEnum.paused }" (click)="onStep()"><mat-icon>redo</mat-icon><span class="margin-left">Step</span></button>
@@ -63,7 +63,7 @@
 </div>
 
 <ng-template #tmCommandRef let-commandPath>
-  <div *ngIf="tmStatesService.program[commandPath.row][commandPath.column]; let command" class="tm-command">
+  <div *ngIf="tmStatesService.program[commandPath.row][commandPath.column]; let command" class="tm-command" [ngClass]="{ target: command.isTarget }">
     {{ command.write || '' }}
     {{ command.direction === 'left' ? '⇦' : command.direction === 'right' ? '⇨' : '⇩' }}
     {{ !command.completeProgram && command.nextCommand !== undefined ? ('Q' + command.nextCommand) : '' }}

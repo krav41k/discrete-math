@@ -1,5 +1,6 @@
 export enum TuringMachineProgramStateEnum {
   running,
   paused,
-  idle
+  idle,
+  finished
 }

@@ -68,6 +68,13 @@
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
+
+  &.target {
+    box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0.9);
+    background: rgba(255, 0, 0, .75);
+    border-radius: 1px;
+    color: white;
+  }
 }
 
 .console {
