@@ -5,6 +5,7 @@
 <div class="cards">
   <div *ngFor="let chapter of chapters" class="card">
     <div class="body">
+      <img *ngIf="chapter.thumbnail" class="thumbnail" src="assets/svg/thumbnails/{{chapter.thumbnail}}" >
       <div class="title">{{ chapter.title }}</div>
     </div>
     <div class="header"></div>

@@ -24,13 +24,24 @@
     flex-direction: column;
     transition: 0.3s all;
     border-radius: 16px;
-    box-shadow: inset 0 4px 7px 1px #ffffff, inset 0 -5px 20px rgba(173, 186, 204, 0.25), 0 2px 6px rgba(0, 21, 64, 0.14), 0 10px 20px rgba(0, 21, 64, 0.05);
+    box-shadow: inset 0 4px 7px 1px rgba(0, 0, 0, 0.3), inset 0 -5px 20px rgba(173, 186, 204, 0.25), 0 2px 6px rgba(0, 21, 64, 0.14), 0 10px 20px rgba(0, 21, 64, 0.05);
     overflow: hidden;
 
     .body {
+      position: relative;
       flex: 1;
       padding: 16px;
-      background-color: yellowgreen;
+      //background-color: yellowgreen;
+
+      .thumbnail {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 400px;
+        width: 400px;
+        opacity: .9;
+        z-index: -1;
+      }
     }
 
     .header {
@@ -68,14 +79,15 @@
 
       &:hover {
         svg-icon svg {
-          fill: #2196f3;
+          fill: #1e9f30;
         }
         box-shadow: 0 5px 10px rgba(29, 160, 156, 0.1), 0 0 10px rgba(0, 0, 0, 0.2);
       }
     }
 
     .title {
-      text-shadow: 0 0 20px $semi-medium-black;
+      display: inline-flex;
+      text-shadow: 0 0 20px $semi-dark-black;
       line-height: 1.2;
       margin-top: 7px;
       font-size: 30px;
@@ -84,7 +96,7 @@
     }
 
     &:hover {
-      box-shadow: inset 0 4px 7px 1px #ffffff, inset 0 -5px 20px rgba(173, 186, 204, 0.25), 0 0 20px rgba(0, 21, 64, 0.14), 0 0 40px rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 4px 7px 1px rgba(0, 0, 0, 0.3), inset 0 -5px 20px rgba(173, 186, 204, 0.25), 0 0 20px rgba(0, 21, 64, 0.14), 0 0 40px rgba(0, 0, 0, 0.2);
     }
   }
 }

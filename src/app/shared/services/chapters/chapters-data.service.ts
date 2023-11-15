@@ -9,7 +9,7 @@ import { chapter5 } from '../../../pages/chapter/data/chapter5';
 })
 export class ChaptersDataService {
   chaptersMap = new Map<number, ChapterModel>([
-    [1, chapter1],
+    // [1, chapter1],
     [2, chapter2],
     [5, chapter5],
   ])
