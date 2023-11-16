@@ -1,7 +1,14 @@
 <mat-toolbar *ngIf="authService.userData" color="primary">
-  <button mat-button [routerLink]="'/dashboard'">
-    <mat-icon>pages</mat-icon>
-    <span class="text-subtitle-2">Dashboard</span>
-  </button>
+  <div class="header-content">
+    <button mat-button [routerLink]="'/dashboard'">
+      <mat-icon>pages</mat-icon>
+      <span class="text-subtitle-2">Dashboard</span>
+    </button>
+  </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
+<div class="footer">
+  <div class="footer-container">
+    <span class="text-caption">Copyright © 2023 Discrete Math</span>
+  </div>
+</div>

@@ -5,4 +5,5 @@ export const chapter2: ChapterModel = {
   title: 'Structures',
   description: '',
   thumbnail: 'structures.webp',
+  thumbnailColor: '#110024cc',
 }

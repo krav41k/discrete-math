@@ -3,4 +3,5 @@ export interface ChapterModel {
   id: number;
   title: string;
   thumbnail?: string;
+  thumbnailColor?: string;
 }

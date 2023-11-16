@@ -10,4 +10,5 @@ export const chapter5: ChapterModel = {
     '<br>\n' +
     '<span>Докладніше теоретичне дослідження алгоритмів вимагає більш формального визначення, такого як поняття <b>машина Т\'юрінга</b>.</span>',
   thumbnail: 'turing-machine.webp',
+  thumbnailColor: '#091918cc',
 }

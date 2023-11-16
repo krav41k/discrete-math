@@ -1,4 +1,4 @@
-<div class="header-container">
+<div class="header-container" [ngStyle]="{ 'background-color': data.thumbnailColor }">
   <div class="header">
     <div class="back" [routerLink]="'/dashboard'"><mat-icon>navigate_before</mat-icon>Back to Dashboard</div>
     <div class="text">
