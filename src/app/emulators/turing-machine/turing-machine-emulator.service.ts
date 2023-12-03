@@ -8,11 +8,13 @@ export class TuringMachineEmulatorService {
   private commandN = 0;
   private delay = 250;
   private lastCommand?: TuringMachineCommandModel;
+  private startIdx = 0;
 
   constructor(private tmStatesService: TuringMachineStatesService) {}
 
   onStart(): void {
     this.tmStatesService.programState = TuringMachineProgramStateEnum.running;
+    this.startIdx = this.tmStatesService.currentIndex$.value;
     this.tmStatesService.addMessageToConsole( 'Program is running');
     this.emulate();
   }
@@ -23,6 +25,7 @@ export class TuringMachineEmulatorService {
       this.lastCommand = undefined;
     }
     this.tmStatesService.applyDataTape();
+    this.tmStatesService.currentIndex$.next(this.startIdx);
     this.commandN = 0;
     this.tmStatesService.programState = TuringMachineProgramStateEnum.idle
     this.tmStatesService.addMessageToConsole('Program is stopped');
@@ -83,7 +86,7 @@ export class TuringMachineEmulatorService {
   }
 
   private onFail(message: string): void {
-    this.tmStatesService.addMessageToConsole('Error: '+message);
+    this.tmStatesService.addMessageToConsole('🚨🚨🚨 Error: '+message);
     this.onStop();
   }
 

@@ -1,6 +1,6 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, Output, ViewChild } from '@angular/core';
-import { ReplaySubject, skip, Subject, takeUntil, tap } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
+import { ReplaySubject, skip, takeUntil, tap } from 'rxjs';
 import { TuringMachineStatesService } from '../../turing-machine-states.service';
 
 @Component({
@@ -42,7 +42,6 @@ export class TuringMachineDataTapeComponent implements AfterViewInit, OnDestroy 
 
   updateViewportWidth() {
     this.viewportWidth = this.elementRef.nativeElement.parentElement.clientWidth;
-    console.log(this.viewportWidth);
     this.scrollToIndex();
   }
 

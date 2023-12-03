@@ -1,6 +1,7 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
-import { removeDuplicates } from '../../shared/functions/remove-duplicates';
+import { turingMachineExample1Const } from './examples/turing-machine-example1.const';
 import { TuringMachineCommandModel } from './turing-machine-command.model';
 import { TuringMachineEmulatorService } from './turing-machine-emulator.service';
 import { TuringMachineMovementDirectionEnum } from './turing-machine-movement-direction.enum';
@@ -11,13 +12,20 @@ import { TuringMachineStatesService } from './turing-machine-states.service';
   templateUrl: './turing-machine.component.html',
   styleUrls: ['./turing-machine.component.scss', './turing-machine-table.scss', './turing-machine-data-tape.scss']
 })
-export class TuringMachineComponent implements OnDestroy {
+export class TuringMachineComponent implements OnInit, OnDestroy {
   selectedCommand?: TuringMachineCommandModel;
 
   tmStatesEnum = TuringMachineProgramStateEnum;
   destroyed$ = new ReplaySubject(1);
 
-  constructor(public tmEmulatorService: TuringMachineEmulatorService, public tmStatesService: TuringMachineStatesService) {}
+  constructor(private route: ActivatedRoute, public tmEmulatorService: TuringMachineEmulatorService, public tmStatesService: TuringMachineStatesService) {}
+
+  ngOnInit(): void {
+    const { example } = this.route.snapshot.queryParams;
+    if (example) {
+      this.loadExample(example);
+    }
+  }
 
   ngOnDestroy(): void {
     this.destroyed$.next(true);
@@ -62,4 +70,18 @@ export class TuringMachineComponent implements OnDestroy {
   }
 
   onStep(): void {}
+
+  private loadExample(exampleNum: string) {
+    switch (exampleNum) {
+      case '1':
+        const ex = turingMachineExample1Const;
+        this.tmStatesService.applyExample(ex.alphabet, ex.dataTapeItems, ex.program);
+        break;
+      case '2':
+        break;
+    }
+
+    const url = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.replaceState({path:url}, '', url);
+  }
 }

@@ -1,4 +1,3 @@
-import { J } from '@angular/cdk/keycodes';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { removeDuplicates } from '../../shared/functions/remove-duplicates';
@@ -43,11 +42,29 @@ export class TuringMachineStatesService {
     this.consoleText += `[${formattedTime}]: ${message} \n`;
   }
 
-  applyDataTape(): void {
+  applyDataTape(reset = false, dataTape?: string[]): void {
+    if (dataTape) {
+      this.dataTapeItems = dataTape;
+      this.saveDataTape();
+      return;
+    }
+
+    if (reset) {
+      this.dataTapeItems = Array.from({length: 2001}, v => v = ' ');
+      this.saveDataTape();
+      return;
+    }
+
     const data = this.localStorageDataTape;
     if (data.alphabet === this.alphabet) {
       this.dataTapeItems = data.dataTape;
     }
+  }
+
+  applyExample(alphabet: string, dataTape: string[], program: { [k: string]: (TuringMachineCommandModel | null )[] }): void {
+   this.onAlphabetChange(alphabet);
+   this.applyDataTape(false, dataTape);
+   this.applyProgram(program);
   }
 
   onAlphabetChange(newAlphabet: string): void {
@@ -71,6 +88,7 @@ export class TuringMachineStatesService {
     }
 
     this.fillProgramArr();
+    this.applyDataTape(true);
   }
 
   onMoveTapeLeft(): void {
@@ -83,6 +101,7 @@ export class TuringMachineStatesService {
 
   saveDataTape(): void {
     this.localStorageDataTape = { dataTape: this.dataTapeItems, alphabet: this.alphabet };
+    console.log(JSON.stringify(this.dataTapeItems));
   }
 
   saveProgram(): void {
