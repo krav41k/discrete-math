@@ -1,3 +1,16 @@
-<div class="title-container">
-  {{ data.title }}
+<div class="content">
+  <div class="title-container">
+    {{ data.title }}
+  </div>
+  <ng-template ngFor let-content [ngForOf]="data.content">
+    <ng-container [ngSwitch]="content.type">
+      <div *ngSwitchCase="'text'" class="text-content">
+        <div [innerHTML]="content.content"></div>
+      </div>
+      <div *ngSwitchCase="'image'" class="img-content">
+        <img [src]="content.content"/>
+      </div>
+    </ng-container>
+  </ng-template>
 </div>
+

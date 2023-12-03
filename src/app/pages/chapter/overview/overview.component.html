@@ -17,10 +17,9 @@
     Turing machine
   </div>
   <div class="map-list">
-    <div class="map-item">Короткий опис машини Тюрінга</div>
-    <div class="map-item">Написання програми для машини Тюрінга</div>
-    <div class="map-item">Приклади задач для машини Тюрінга</div>
-    <div class="map-item">Задачі для самостійного розв'язання</div>
+    <a *ngFor="let page of data.pages; index as i" class="map-item" [href]="'/chapter/'+data.id+'/page/'+i">
+      {{ page.title }}
+    </a>
   </div>
 </div>
 <button mat-stroked-button [routerLink]="'/emulator/turing-machine'">

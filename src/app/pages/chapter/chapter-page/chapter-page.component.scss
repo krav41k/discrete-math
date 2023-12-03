@@ -7,12 +7,34 @@
   align-items: center;
 }
 
-.title-container {
-
+.content {
+  max-width: 1068px;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  gap: 24px;
+  box-sizing: border-box;
 }
 
-@media screen and (max-width: 1024px) {
-  .map-grid {
-    grid-template-columns: auto auto !important;
+.title-container {
+  font-size: 18px;
+  font-weight: 500;
+  color: $semi-dark-black;
+  text-indent: 24px;
+  padding-bottom: 8px;
+
+  border-bottom: 1px solid $semi-light-black;
+}
+
+.text-content {
+  text-indent: 24px;
+  color: $semi-medium-black;
+}
+
+.img-content {
+  img {
+    width: 100%;
   }
 }
