@@ -1,8 +1,14 @@
-<mat-toolbar *ngIf="authService.userData" color="primary">
+<mat-toolbar *ngIf="authService.userData || authService.anonymousLogin" color="primary">
   <div class="header-content">
     <button mat-button [routerLink]="'/dashboard'">
       <mat-icon>dashboard</mat-icon>
       <span class="text-subtitle-2">Dashboard</span>
+    </button>
+    <div class="divider"></div>
+    <span class="user-name">{{ authService.userData?.email || 'Anonymous' }}</span>
+    <button mat-button [routerLink]="'/dashboard'">
+      <mat-icon>logout</mat-icon>
+      <span class="text-subtitle-2" (click)="logout()">Logout</span>
     </button>
   </div>
 </mat-toolbar>

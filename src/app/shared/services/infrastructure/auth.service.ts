@@ -10,6 +10,7 @@ import { User } from '../../models/infrastructure/user';
   providedIn: 'root',
 })
 export class AuthService {
+  anonymousLogin? = !!localStorage.getItem('anonymousLogin');
   userData: any; // Save logged in user data
   constructor(
     private afs: AngularFirestore, // Inject Firestore service
@@ -22,13 +23,20 @@ export class AuthService {
     this.afAuth.authState.pipe(take(1)).subscribe((user) => {
       if (user) {
         this.userData = user;
+        if (!localStorage.getItem('user')) {
+          this.router.navigate(['dashboard']);
+        }
         localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
       } else {
         localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
       }
     });
+  }
+
+  doAnonymousLogin(): void {
+    this.anonymousLogin = true;
+    localStorage.setItem('anonymousLogin', '1');
+    this.router.navigate(['dashboard']);
   }
 
   SignIn(email: string, password: string) {
@@ -37,7 +45,10 @@ export class AuthService {
       .then((result) => {
         this.afAuth.authState.pipe(take(1)).subscribe((user) => {
           if (user) {
-            this.router.navigate(['dashboard']);
+          this.userData = user;
+          localStorage.setItem('user', JSON.stringify(this.userData));
+
+          this.router.navigate(['dashboard']);
           }
         });
       })
@@ -84,7 +95,7 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false;
+    return (user !== null && user.emailVerified !== false) || !!this.anonymousLogin;
   }
 
   // Sign in with Google
@@ -128,8 +139,11 @@ export class AuthService {
 
   SignOut() {
     return this.afAuth.signOut().then(() => {
+      delete this.anonymousLogin;
+      delete this.userData;
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      localStorage.removeItem('anonymousLogin');
+      setTimeout(() => this.router.navigate(['login']));
     });
   }
 }

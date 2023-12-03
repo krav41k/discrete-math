@@ -12,7 +12,7 @@
   <span class="introduction">Introduction</span>
   <span [innerHTML]="data.description" class="desc"></span>
 </div>
-<div class="map">
+<div class="map" *ngIf="!data.disabled">
   <div class="map-header">
     Turing machine
   </div>
@@ -22,6 +22,6 @@
     </a>
   </div>
 </div>
-<button mat-stroked-button [routerLink]="'/emulator/turing-machine'">
+<button *ngIf="!data.disabled" mat-stroked-button [routerLink]="'/emulator/turing-machine'">
   Turing Machine Emulator
 </button>

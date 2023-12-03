@@ -19,6 +19,14 @@ mat-toolbar {
   display: flex;
   align-items: center;
   padding: 0 20px;
+
+  .divider {
+    flex: 1;
+  }
+
+  .user-name {
+    margin-right: 8px;
+  }
 }
 
 .footer {

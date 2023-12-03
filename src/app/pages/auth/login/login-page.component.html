@@ -6,7 +6,7 @@
     <div [formGroup]="form" class="form">
       <mat-form-field color="accent">
         <mat-label>Enter your email</mat-label>
-        <input formControlName="email" matInput placeholder="pat@example.com" required>
+        <input formControlName="email" matInput placeholder="pat@example.com" type="email" required>
         <ng-template [ngIf]="form.controls['email'].touched && form.controls['email'].errors">
           <mat-error *ngIf="form.controls['email'].errors['required']">{{ 'You must enter a value' }}</mat-error>
           <mat-error *ngIf="form.controls['email'].errors['email']">{{ 'Not a valid email' }}</mat-error>
@@ -21,6 +21,8 @@
         </ng-template>
       </mat-form-field>
       <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="signIn()">Sign In</button>
+      <br>
+      <button mat-raised-button color="primary" (click)="onAnonymousLogin()">Anonymous Login</button>
       <span class="forgot-password">Forgot Password</span>
     </div>
   </div>

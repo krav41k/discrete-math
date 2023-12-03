@@ -20,4 +20,8 @@ export class LoginPageComponent {
       this.authService.SignIn(email, password);
     }
   }
+
+  onAnonymousLogin(): void {
+    this.authService.doAnonymousLogin();
+  }
 }

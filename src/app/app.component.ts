@@ -8,4 +8,8 @@ import { AuthService } from './shared/services/infrastructure/auth.service';
 })
 export class AppComponent {
   constructor(public authService: AuthService) {}
+
+  logout() {
+    this.authService.SignOut();
+  }
 }
