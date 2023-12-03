@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ChapterModel } from '../../../pages/chapter/data/chapter.model';
-import { chapter1 } from '../../../pages/chapter/data/chapter1';
-import { chapter2 } from '../../../pages/chapter/data/chapter2';
-import { chapter5 } from '../../../pages/chapter/data/chapter5';
+import { chapter2 } from '../../../pages/chapter/data/chapter2/chapter2';
+import { chapter5 } from '../../../pages/chapter/data/chapter5/chapter5';
 
 @Injectable({
   providedIn: 'root'

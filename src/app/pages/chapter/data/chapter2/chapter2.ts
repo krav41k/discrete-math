@@ -1,4 +1,5 @@
-import { ChapterModel } from './chapter.model';
+import { ChapterModel } from '../chapter.model';
+
 
 export const chapter2: ChapterModel = {
   id: 2,

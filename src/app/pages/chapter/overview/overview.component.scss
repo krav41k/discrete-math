@@ -107,12 +107,11 @@
     }
   }
 
-  .map-grid {
-    display: grid;
-    grid-template-columns: auto auto auto;
+  .map-list {
+    display: flex;
+    flex-direction: column;
 
     .map-item {
-      min-width: 360px;
       padding: 16px;
       box-sizing: border-box;
       border: 1px solid $gray;
