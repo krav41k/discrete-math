@@ -14,7 +14,7 @@
 </div>
 <div class="map" *ngIf="!data.disabled">
   <div class="map-header">
-    Turing machine
+    {{ 'Turing machine' }}
   </div>
   <div class="map-list">
     <a *ngFor="let page of data.pages; index as i" class="map-item" [href]="'/chapter/'+data.id+'/page/'+i">

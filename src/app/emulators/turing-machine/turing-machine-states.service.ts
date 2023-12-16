@@ -82,7 +82,7 @@ export class TuringMachineStatesService {
     this.dataSource = this.rowHeaders = newAlphabetArr;
 
     const savedProgram = this.localStorageProgram;
-    if (Object.keys(savedProgram).reduce((acc, cur) => acc += cur) === newAlphabet) {
+    if (savedProgram && Object.keys(savedProgram).length > 0 && Object.keys(savedProgram).reduce((acc, cur) => acc += cur) === newAlphabet) {
       this.applyProgram(savedProgram);
       return;
     }

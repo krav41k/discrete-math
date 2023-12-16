@@ -9,7 +9,7 @@
         <input formControlName="email" matInput placeholder="pat@example.com" type="email" required>
         <ng-template [ngIf]="form.controls['email'].touched && form.controls['email'].errors">
           <mat-error *ngIf="form.controls['email'].errors['required']">{{ 'You must enter a value' }}</mat-error>
-          <mat-error *ngIf="form.controls['email'].errors['email']">{{ 'Not a valid email' }}</mat-error>
+          <mat-error *ngIf="form.controls['email'].errors['email']">{{ 'Invalid email address' }}</mat-error>
         </ng-template>
       </mat-form-field>
       <mat-form-field color="accent">
